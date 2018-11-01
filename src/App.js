@@ -10,32 +10,6 @@ import './App.css';
 let Calculator = (props) => {
   /*const { handleSubmit } = props;*/
 
-  const {
-    daysPerWeekValue,
-    casesPerDayValue,
-    weeksPerYearValue,
-    totalAnnualCasesValue,
-    SSIrateValue,
-    averageCaseCostValue,
-    numberORsValue,
-    column15SSIreductionValue,
-    column30SSIreductionValue,
-    column45SSIreductionValue
-  } = props;
-
-  const customValues = {
-    daysPerWeekValue,
-    casesPerDayValue,
-    weeksPerYearValue,
-    totalAnnualCasesValue,
-    SSIrateValue,
-    averageCaseCostValue,
-    numberORsValue,
-    column15SSIreductionValue,
-    column30SSIreductionValue,
-    column45SSIreductionValue
-  }
-
   return (
     <form className="form">
       <div className='title container'>
@@ -54,71 +28,81 @@ let Calculator = (props) => {
               <div className="field">
                 <div className="control independent">
                   <label className="label">Days Per Week Used</label>
-                  <Field name="daysPerWeek" component={CustomInput} type="independent"  customValues={customValues} />
+                  <Field name="daysPerWeek" component={CustomInput} customValues={props.customValues} />
                 </div>
                 <div className="control independent">
                   <label className="label">Cases Per Day</label>
-                  <Field name="casesPerDay" component={CustomInput} type="independent"  customValues={customValues} />
+                  <Field name="casesPerDay" component={CustomInput} customValues={props.customValues} />
                 </div>
                 <div className="control independent">
                   <label className="label">Weeks Per Year Used</label>
-                  <Field name="weeksPerYear" component={CustomInput} type="independent"  customValues={customValues} />
+                  <Field name="weeksPerYear" component={CustomInput} customValues={props.customValues} />
                 </div>
               </div>
             </div>
             <div className='manual hybrid container'>
               <label className="label">Or, Enter Total Annual cases</label>
-              <Field name="totalAnnualCases" component={CustomInput} type="hybrid"  customValues={customValues}/>
+              <Field name="totalAnnualCases" component={CustomInput} customValues={props.customValues}/>
             </div>
           </div>
         </div>
       </div>
-      <Results {...props} customValues={customValues} />
+      <Results {...props} customValues={props.customValues} />
     </form>
   ) // end return
 };
+
 
 Calculator = reduxForm({
   form: 'Calculator'
 })(Calculator);
 
 const selector = formValueSelector('Calculator') // <-- same as form name
-Calculator = connect(
-  state => {
-    // can select values individually
-    const daysPerWeekValue = parseInt(selector(state, 'daysPerWeek'))
-    const casesPerDayValue = parseInt(selector(state, 'casesPerDay'));
-    const weeksPerYearValue = parseInt(selector(state, 'weeksPerYear'));
-    const totalAnnualCasesValue = parseInt(selector(state, 'totalAnnualCases'));
-    const SSIrateValue= parseInt(selector(state,'SSIrate'));
-    const averageCaseCostValue = parseInt(selector(state,'averageCaseCost'));
-    const numberORsValue = parseInt(selector(state,'numberORs'));
-    const column15SSIreductionValue = parseInt(selector(state,'column15SSIreduction'));
-    const column30SSIreductionValue = parseInt(selector(state,'column30SSIreduction'));
-    const column45SSIreductionValue = parseInt(selector(state,'column45SSIreduction'));
-
-    return {
-      daysPerWeekValue,
-      casesPerDayValue,
-      weeksPerYearValue,
-      totalAnnualCasesValue,
-      SSIrateValue,
-      averageCaseCostValue,
-      numberORsValue,
-      column15SSIreductionValue,
-      column30SSIreductionValue,
-      column45SSIreductionValue
-    }
+let mapStateToProps = (state) => {
+  //parsing selection to an integer
+  var customValues = selector(state,
+      'daysPerWeek',
+      'casesPerDay',
+      'weeksPerYear',
+      'totalAnnualCases',
+      'SSIrate',
+      'averageCaseCost',
+      'numberORs',
+      'column15SSIreduction',
+      'column30SSIreduction',
+      'column45SSIreduction'
+    );
+  const keys = Object.keys(customValues);
+  keys.forEach(function(key) {
+    customValues[key] = parseInt(customValues[key]);
+  })
+  return {
+    customValues: customValues
   }
+}
+Calculator = connect(
+  mapStateToProps
 )(Calculator)
 
 class App extends Component {
-
+  
   render() {
+    const initialValues = {
+      daysPerWeek: "",
+      casesPerDay: "",
+      weeksPerYear: "",
+      totalAnnualCases: "",
+      SSIrate: "45",
+      averageCaseCost: "10",
+      numberORs: "20",
+      column15SSIreduction: "15",
+      column30SSIreduction: "30",
+      column45SSIreduction: "45"
+    } 
     return (
       <div className="App">
         <div className="container">
-          <Calculator />
+          <Calculator initialValues={initialValues} />
         </div>
       </div>
     );
