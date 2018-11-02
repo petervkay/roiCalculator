@@ -14,17 +14,17 @@ class CustomInput extends Component {
         value: props.input.value, // 2 and 3
       }
     }
-
+/*
   componentDidUpdate(prevProps, prevState) {
-    this.props.updateSelf(this.state.value);
-	}
+
+
+	}*/
 
 	 debounceAndEmit() {
 
 	 }
 
     handleChange(event) {
-      console.log('test');
    		var eventValue = event.target.value.replace( /\D+/g, ''); //strips out non-numeric characters
    		   		// check to make sure users don't delete $'s or percents 
 /*   		if (this.props.symbol==='dollar' && !eventValue.startsWith('$')) {
@@ -35,14 +35,30 @@ class CustomInput extends Component {
    			var value = eventValue
    		}*/
 
-   		this.setState({ value: eventValue })
+   		this.props.updateSelf(eventValue);
+
+      //sets behavior when editing the values which determine total annual cases, will update TAC when you update all 3 and set TAC to
+      //to blank if one is blank
+      if (this.props.input.name==='daysPerWeek'||this.props.input.name==='weeksPerYear'||this.props.input.name==='casesPerDay') {
+        const cv = this.props.customValues;
+        if (cv.daysPerWeek && cv.weeksPerYear && cv.casesPerDay) {
+          var value = cv.daysPerWeek * cv.weeksPerYear * cv.casesPerDay;
+          this.props.dispatchTotalAnnualCases(value);
+        } else {
+          this.props.dispatchTotalAnnualCases("");
+        }
+      }
+
+      if(this.props.input.name==="totalAnnualCases") {
+        this.props.resetOthers(["daysPerWeek","weeksPerYear","casesPerDay"]);
+      }
  	}
 
     render() {
 
 	    return(
 		    	 <NumberFormat
-              value = {this.state.value}
+              value = {this.props.input.value}
               onFocus = {()=>{}}
               onBlur = {this.handleChange.bind(this)}
               onChange = {this.handleChange.bind(this)}
@@ -58,7 +74,7 @@ class CustomInput extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   updateSelf: (value) => dispatch(change(ownProps.meta.form, ownProps.input.name, value)),
   resetOthers: (others) => others.map(function(name){
-    dispatch(change(ownProps.meta.form, ownProps.input.name, ""))
+    dispatch(change(ownProps.meta.form, name, ""))
   }),
   dispatchTotalAnnualCases: (value) => dispatch(change(ownProps.meta.form,"totalAnnualCases",value))
 })
