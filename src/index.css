@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -21,40 +27,273 @@ input[type=number]::-webkit-outer-spin-button {
 
 h1,h2,h3,h4 {
   color:#04a6df;
+  font-family: 'Oswald',Helvetica,Arial,Lucida,sans-serif;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+h2,h3,h4 {
+  font-weight: 200;
 }
 
 h1.green,h2.green,h3.green,h4.green {
   color: #8dc73f;
 }
 
+h1 {
+  font-size: 44px;
+}
+
+h2 {
+  font-size: 35px;
+}
+
+h3 {
+  font-size:22px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 28px;
+  margin: 0;
+  padding-bottom: 20px;
+}
+
+hr {
+  border-bottom: 2px solid #04a6df;
+  border-top: 0;
+  margin-top: 20px;
+}
+
+input {
+  width: 100%;
+  border-width:0;
+  height: 45px;
+  padding:5px;
+  font-size:24px;
+  text-align: center;
+}
+
+.label {
+  display:block;
+  border-width:0;
+}
+
+label.inline, input.inline {
+  display:inline;
+}
+
+img {
+  max-width: 100%;
+}
+
+.white {
+  color:white;
+}
+
+.black {
+  color: black;
+}
+
+.gray {
+  color: #666;
+}
+
+.bg-blue {
+  background-color: #04a6df;
+}
+
+.bg-green {
+  background-color: #8dc73f;
+}
+
+.bg-gray {
+  background-color: #a7a9ac;
+}
+
 .row {
   display:flex;
+  justify-content: space-between;
 }
 
 .two-column {
-  flex-basis:50%;
+  flex-basis:45%;
+}
+
+.five-column {
+  flex-basis: 18%;
+  width:18%;
 }
 
 .container {
-	padding: 40px 20px;
+	padding: 20px 20px;
+  border-radius: 10px;
 }
 
 .border-bottom {
   border-bottom: 2px solid #04a6df;
 }
 
-.assumptions .label, .results .label {
-  display:block;
+.align-left {
+  text-align: left;
 }
 
+.align-right {
+  text-align: right;
+}
+
+/* specific styles */
+
 .totalAnnualCases .automatic {
-	background-color: #00a4e5
+	background-color: #00a4e5;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+}
+
+.totalAnnualCases .automatic .times {
+  margin: 0 20px;
+  font-size: 48px;
+  font-weight:400;
+  transform: translateY(-8px);
 }
 
 .totalAnnualCases .manual {
 	background-color: #8dc73f;
 }
 
+.totalAnnualCases .manual input {
+  display: inline;
+  width: 150px;
+  margin-left: 20px;
+}
+
+.totalAnnualCases .label {
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  letter-spacing: -.5px;
+}
+
+.results label {
+  font-size: 18px;
+}
+
+.results label.large {
+  font-size:28px;
+}
+
+.assumptions .container {
+  margin-bottom:16px;
+}
+
+.assumptions h3 {
+  margin-top: 20px;
+}
+
+.assumptions .label {
+  margin-bottom:10px;
+}
+
+.assumptions .label, .results .label {
+  display:block;
+}
+
 .dependent-value {
   display:block;
+}
+
+.assumptions input {
+  width: 150px;
+}
+
+.small-input input {
+  width:100px;
+}
+
+.cla .container {
+  border: 3px solid #a7a9ac;
+  padding: 0 0 10px 0;
+}
+
+.cla-intro {
+  padding: 10px;
+  border-radius: 4px 4px 0 0;
+  line-height: 20px;
+}
+
+.dependent {
+  padding: 6px 0;
+}
+
+.dependent label {
+  margin-bottom: 4px;
+}
+
+.dependent .dependent-value span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dependent.large-value .dependent-value span {
+  font-size: 28px;
+}
+
+.surgicair-logo {
+  margin-top: -3px; /* countermand white space in image */
+  width: 140px;
+}
+
+.container.reduction {
+  border: 4px solid #04a6df;
+  padding: 0;
+}
+
+.reduction .rate {
+  padding: 10px;
+}
+
+.reduction .rate .label {
+  margin-bottom: 4px;
+}
+
+.reduction .section:not(:last-child) {
+  border-bottom:4px solid #04a6df;
+}
+
+.reduction input {
+  width: 150px;
+  height: 32px;
+}
+
+.rate .section {
+  padding: 12px 0; 
+}
+
+.reduction .section label {
+  color: #04a6df;
+}
+
+.reduction .roi label{
+  font-size: 48px;
+}
+
+ .roi .dependent-value span {
+  font-size: 36px;
+ }
+
+.reduction .roi .circle {
+  padding: 35px 20px;
+  display: inline-block;
+  border-radius: 100px;
+  color: white;
+  background-color: #04a6df;
+}
+
+.roi .months {
+  text-transform: uppercase;
 }
