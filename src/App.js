@@ -19,12 +19,12 @@ let Calculator = (props) => {
       </div>
       <div className='row'>
         <div className='two-column align-left'>
-          <h2 style={{"font-size":"30px","padding":"50px 0"}}>Calculate the human benefits and ROI of the SurgicAir ZERO Airflow System.</h2>
+          <h2 style={{"fontSize":"30px","padding":"50px 0"}}>Calculate the human benefits and ROI of the SurgicAir ZERO Airflow System.</h2>
           <p className='gray'> Airborne pathogens are a proven and significant source of SSIs, contributing substantially to surgical morbidity and mortality each year. The first step to this problem is in their prevention, and that’s where SurgicAir™ Zero Airflow comes in.</p>
         </div>
         <div className='two-column'>
           <div className = 'totalAnnualCases'>
-            <h3 style={{"font-size":"24px","text-transform":"uppercase", "padding-top":"50px"}}> Calculate total annual SSI cases per O.R. </h3>
+            <h3 style={{"fontSize":"24px","textTransform":"uppercase", "paddingTop":"50px"}}> Calculate total annual SSI cases per O.R. </h3>
             <div className='automatic container'>
                 <div className="control independent">
                   <Field name="daysPerWeek" component={CustomInput} customValues={props.customValues} />
@@ -48,7 +48,7 @@ let Calculator = (props) => {
           </div>
         </div>
       </div>
-      <hr style={{"margin-top":"60px", "margin-bottom":"40px"}} />
+      <hr style={{"marginTop":"60px", "marginBottom":"40px"}} />
       <Results {...props} customValues={props.customValues} />
     </form>
   ) // end return
@@ -76,7 +76,7 @@ let mapStateToProps = (state) => {
     );
   const keys = Object.keys(customValues);
   keys.forEach(function(key) {
-    customValues[key] = parseInt(customValues[key]);
+    customValues[key] = Number(customValues[key]);
   })
   return {
     customValues: customValues

@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format';
 export default class Dependent extends Component {
 
 	render() {
+
 		return(
 			<div className='dependent-value'>
 				<NumberFormat

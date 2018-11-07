@@ -10,13 +10,13 @@ export default class Results extends Component {
 		const reductionValues = [cv.column15SSIreduction,cv.column30SSIreduction,cv.column45SSIreduction];
 		return(
 		<div className='results'>
-	        <h1 style={{"font-weight":"normal", "margin-bottom":"40px"}} className="align-left"> Your Results </h1>
+	        <h1 style={{"fontWeight":"normal", "marginBottom":"40px"}} className="align-left"> Your Results </h1>
 	        <div className='row'>
 	          <div className='five-column assumptions'>
 	            <h3 className='green'> Assumptions </h3>
 	            <div className='container bg-green small-input'>
 	              <label className='label large white'>SSI Rate </label>
-	              <Field name='SSIrate' component={CustomInput}  suffix='%' />
+	              <Field name='SSIrate' component={CustomInput}  suffix='%' decimal={true} maximum={100}/>
 	            </div>
 	            <div className='container bg-green'>
 	              <label className='label white'>Average SSI Case Cost Per O.R.</label>
@@ -28,8 +28,8 @@ export default class Results extends Component {
 	            </div>
 	          </div>
 	        <div className='five-column cla'>
-	            <h3 className='black' style={{"line-height":"27px"}}>Compliant<br /> Laminar Airflow</h3>
-	            <div class='container'>
+	            <h3 className='black' style={{"lineHeight":"27px"}}>Compliant<br /> Laminar Airflow</h3>
+	            <div className='container'>
 		            <p className='white bg-gray cla-intro'>
 		                Complaint Laminar Airflow is what your O.R. has if it doesn't have SurgicAir Zero
 		            </p>
@@ -53,14 +53,14 @@ export default class Results extends Component {
 	          {[15,30,45].map(function(percentage, index){
 
 	          	return (
-	          		<div className='five-column' key={index}>
+	          		<div className={"five-column reduction"+percentage} key={index}>
 	          			<img src={surgicair} alt="SurgicAir Zero Logo" className='surgicair-logo'/>
-	          			<div className='container reduction'>
-	          				<div class='rate bg-blue'>
+	          			<div className="container reduction">
+	          				<div className='rate bg-blue'>
 			          			<label className='label white'>Enter SSI Reduction Rate</label>
-			          			<Field name={"column" + percentage + "SSIreduction"} component={CustomInput} suffix="%" />
+			          			<Field name={"column" + percentage + "SSIreduction"} component={CustomInput} suffix="%" decimal={true}/>
 			          		</div>
-			          		<div class='section'>
+			          		<div className='section'>
 			          			<div className='dependent large-value'>
 				          			<label className='label'>Number of SSIs</label>
 				          			<Dependent
@@ -77,7 +77,7 @@ export default class Results extends Component {
 				          			/>
 			          			</div>
 			          		</div>
-			          		<div class='section'>
+			          		<div className='section'>
 			          			<div className='dependent'>
 				          			<label className='label'>SSIs Prevented</label>
 				          			<Dependent
@@ -95,7 +95,7 @@ export default class Results extends Component {
 				          			/>
 				          		</div>
 				          	</div>
-				          	<div class='section'>
+				          	<div className='section'>
 			          			<div className='dependent roi'>
 				          			<label className='label'>ROI</label>
 				          			<div className='circle'>

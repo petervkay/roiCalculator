@@ -297,3 +297,18 @@ img {
 .roi .months {
   text-transform: uppercase;
 }
+
+@media screen and (max-width:1200px) {
+  .reduction15, .reduction30 {
+    display:none;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .two-column, .five-column {
+    flex-basis: 100%;
+    width: 100%;
+  }
+}

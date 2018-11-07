@@ -25,17 +25,19 @@ class CustomInput extends Component {
 	 }
 
     handleChange(event) {
-   		var eventValue = event.target.value.replace( /\D+/g, ''); //strips out non-numeric characters
-   		   		// check to make sure users don't delete $'s or percents 
-/*   		if (this.props.symbol==='dollar' && !eventValue.startsWith('$')) {
-   			var value = '$' + eventValue;
-   		} else if (this.props.symbol==='percent' && !eventValue.endsWith('%')) {
-   			var value = eventValue + "%";
-   		} else {
-   			var value = eventValue
-   		}*/
+      if (!this.props.decimal) {
+   		 var eventValue = event.target.value.replace( /\D+/g, ''); //strips out non-numeric characters
+      } else {
+        var eventValue = event.target.value.replace(/[^0-9.]/g, '');  //strips out non-numeric characters except decimals
+        eventValue = eventValue.substring(0,4);
+      }
+       console.log(eventValue);
+
+      eventValue = parseInt(eventValue,10);
+
 
    		this.props.updateSelf(eventValue);
+      this.state.value = eventValue; //not correct, but doesn't trigger rerenders which is desirable here
 
       //sets behavior when editing the values which determine total annual cases, will update TAC when you update all 3 and set TAC to
       //to blank if one is blank
@@ -55,18 +57,31 @@ class CustomInput extends Component {
  	}
 
     render() {
-
 	    return(
-		    	 <NumberFormat
-              value = {this.props.input.value}
-              onFocus = {()=>{}}
-              onBlur = {this.handleChange.bind(this)}
-              onChange = {this.handleChange.bind(this)}
-              onInput = {this.handleChange.bind(this)}
-	        		thousandSeparator = {true}
-	        		prefix = {this.props.prefix}
-	        		suffix = {this.props.suffix}
-	      		/>
+		    	     <NumberFormat
+                  value = {this.props.input.value || 0}
+                  onFocus = {()=>{}}
+                  onBlur = {this.handleChange.bind(this)}
+                  onChange = {this.handleChange.bind(this)}
+                  onInput = {this.handleChange.bind(this)}
+    	        		thousandSeparator = {true}
+    	        		prefix = {this.props.prefix}
+    	        		suffix = {this.props.suffix}
+                  decimalScale = {1}
+                  isAllowed={(values) => {
+                    const {floatValue} = values;
+                    if (typeof floatValue==='undefined') {
+                      return true;
+                    }    
+
+                    if (this.props.maximum) {
+                      return floatValue <= this.props.maximum;
+                    } else {
+                      return true;
+                    }
+                    
+                  }}
+    	      		/>
 	    )
 	}
 }
