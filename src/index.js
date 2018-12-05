@@ -1,3 +1,4 @@
+import 'react-app-polyfill/ie9';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -8,7 +9,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
+
+require('es6-object-assign').polyfill();
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -19,6 +22,8 @@ const store = createStore(
 	composeWithDevTools()
 );
 
+/*Modal.setAppElement('#root');*/
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
@@ -26,4 +31,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-registerServiceWorker();
+unregister(); // trying to prevent potential caching problems
