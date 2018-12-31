@@ -42,7 +42,7 @@ export default class Results extends Component {
 	            <h3 className='gray' style={{"lineHeight":"27px"}}>Compliant<br /> Laminar Airflow</h3>
 	            <div className='container'>
 		            <p className='white bg-gray cla-intro'>
-		                Complaint Laminar Airflow is what your O.R. has if it doesn't have SurgicAir Zero
+		                This is what your O.R. has if it doesn't have SurgicAir Zero
 		            </p>
 		            <div className='dependent large-value'>
 			            <label className='label '>Number of SSIs</label>
@@ -110,7 +110,7 @@ export default class Results extends Component {
 				          	</div>
 				          	<div className='section'>
 			          			<div className='dependent roi'>
-				          			<label className='label'>ROI</label>
+				          			<label className='label'>Payback</label>
 				          			<div className='circle'>
 					          			<Dependent
 					          				name={"ROI"+percentage}

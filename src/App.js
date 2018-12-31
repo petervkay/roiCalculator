@@ -12,11 +12,7 @@ let Calculator = (props) => {
 
   return (
     <form className="form">
-      <div className='title align-left'>
-        <h2>SurgicAir ZERO</h2>
-        <h1>SSI Prevention Calculator</h1>
-        <hr />
-      </div>
+
       <div className='row'>
         <div className='two-column align-left'>
           <h2 style={{"fontSize":"30px","padding":"40px 0","fontWeight": "300"}}>Calculate the benefits and payback of the SurgicAir Zero Airflow System.</h2>
